@@ -5,17 +5,24 @@ const TodoGenerator = (props) => {
     const [todoItem, setTodoItem] = useState("");
     const submitInput = () =>{
         const inputItem = todoItem;
-        setTodoItem(inputItem);
-        props.onInputChange(inputItem)
-        setTodoItem("");
+        if(!todoItem.match(/[a-z]/i)) {
+            alert("Invalid input! please add text");
+            setTodoItem("");
+        }else{
+            setTodoItem(inputItem);
+            props.onInputChange(inputItem)
+            setTodoItem("");
+        }
+        
     }
     return (
         <div className="todoGenerator">
-            <input type= 'text' value={todoItem}
+            <input placeholder='type to add new task' type= 'text' value={todoItem}
               onChange={event => setTodoItem(event.target.value)} />
-            <button onClick={submitInput}>Add Task</button>  
+            <button onClick={submitInput}>add</button>  
         
             
         </div>
     )
 }
+export default TodoGenerator;
